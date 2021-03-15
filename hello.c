@@ -107,18 +107,18 @@ static int __init hello_init(void)
 	int r2;
 	char* buf3=kmalloc(2420000, GFP_KERNEL);
 	r2=read_from_file_until(mf2,buf3,2420000);
-	char search[14]=" sys_call_table";
+	char search[15]=" sys_call_table";
 
 	int j=0;
 	int k=0;
 	int ind=0;
 
-	for(j=0;j<strlen(buf3)-14;j++)
+	for(j=0;j<strlen(buf3)-15;j++)
 	{
 		if(buf3[j]==search[k])
 		{
 			k++;
-			if(k==14)
+			if(k==15)
 			{
 				ind=j;
 			}
@@ -129,11 +129,12 @@ static int __init hello_init(void)
 		}
 	}
 
-	char ans[16];
+	char ans[17];
 	int c=0;
-	for(j=ind-32;j<ind-16;j++)
+	for(j=ind-32;j<ind-15;j++)
 	{	
 		ans[c]=buf3[j];
+
 		c++;
 	}
 	printk(KERN_ALERT "%s\n", ans);
